@@ -72,7 +72,21 @@ void PrintBooks() {
 }
 
 // function to search for a book
-struct Book *SearchBook(/*...*/) {}
+struct Book *SearchBook(char author[20]) {
+  // returns the pointer to the book where the given book must be after (it will
+  // be after the book of the same author)
+  if (booksHead == NULL) // list is empty
+    return NULL;
+
+  struct Book *current = booksHead;
+  while (current->next != NULL) {
+    if (current->author == author)
+      return current;
+    else
+      current = current->next;
+  }
+  return current; // NULL; // not found
+}
 
 // function to simulate a sorting of books
 void SimulateSortingBooks(struct Book *book) {}
