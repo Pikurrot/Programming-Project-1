@@ -45,6 +45,8 @@ void CheckArguments(int argc, char **argv) {
     printf("You must enter an integer (over 0)\n");
     return;
   }
+
+  EventNumbers = x;
 }
 
 //----------------------------------------------------------Books
@@ -185,6 +187,8 @@ int main(int argc, char **argv) {
   printf("Starting... \n");
   CheckArguments(argc, argv);
 
+  if (EventNumbers == -1)
+    return 1;
 
   SimulationLoop(EventNumbers);
   return 0;
