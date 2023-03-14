@@ -17,6 +17,32 @@ enum EventType GenerateEventType() { return rand() % 3; }
 
 void CheckArguments(int argc, char **argv) {
   // check the input introduced by the user
+  int x;
+  float xf;
+
+  if (argc < 2) {
+    printf("Argument is missing (integer)!\n");
+    return;
+  } else if (argc > 2) {
+    printf("Too much arguments. You must pass only one (integer).\n");
+    return;
+  }
+
+  x = atoi(argv[1]); // Convert argument to integer
+  xf = atof(argv[1]);
+
+  if (x != xf) {
+    printf("You entered %f, but will be treated as %d\n", xf, x);
+  }
+
+  // Convert x to positive if negative
+  if (x < 0) {
+    printf("Argument passed was negative, will be treated as positive int\n");
+    x *= -1;
+  } else if (x == 0) {
+    printf("You must enter an integer (over 0)\n");
+    return;
+  }
 }
 
 //----------------------------------------------------------Books
