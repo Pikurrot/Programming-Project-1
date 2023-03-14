@@ -11,6 +11,8 @@ Simulator - main program
 
 #include "project1.h" // header with all data structures
 
+int EventNumbers = -1;
+
 //----------------------------------------------------------General
 // WARNING: do not change this function
 enum EventType GenerateEventType() { return rand() % 3; }
@@ -180,11 +182,9 @@ void SimulationLoop(int EventNumbers) {
 }
 
 int main(int argc, char **argv) {
-  int EventNumbers;
   printf("Starting... \n");
   CheckArguments(argc, argv);
 
-  // initialize EventNumbers
 
   SimulationLoop(EventNumbers);
   return 0;
