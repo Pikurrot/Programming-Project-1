@@ -60,7 +60,16 @@ struct Book *GenerateBook() {
 }
 
 // function to print a list of books
-void PrintBooks() {}
+void PrintBooks() {
+  struct Book *booksCurrent = booksHead;
+  while (booksCurrent != NULL) {
+    printf("%s=>", booksCurrent->author);
+    printf("%s=>", booksCurrent->title);
+    printf("%d=>", booksCurrent->year);
+    booksCurrent = booksCurrent->next;
+  }
+  printf("\n");
+}
 
 // function to search for a book
 struct Book *SearchBook(/*...*/) {}
