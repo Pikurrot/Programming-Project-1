@@ -163,6 +163,25 @@ void CleanShoppingQueue(/*...*/) {}
 // It generates and consumes events.
 void SimulationLoop(int EventNumbers) {
   // declare and initialize necessary variables
+  int i;
+  enum EventType currentEvent;
+  struct Book *currenBook;
+  struct Plate *currenPlate;
+
+  for (i = 0; i < EventNumbers; i++) {
+    currentEvent = GenerateEventType();
+    switch (currentEvent) {
+    case book:
+      currenBook = GenerateBook();
+      break;
+    case plate:
+      currenPlate = GeneratePlate();
+      break;
+    case shopping:
+			GenerateShopping();
+      break;
+    }
+  }
 
   InitStacks();
 
