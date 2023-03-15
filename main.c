@@ -109,7 +109,32 @@ void SimulateSortingBooks(struct Book *book) {
 }
 
 // function to remove a list of books at the end of the program
-void RemoveSortingBooks() {}
+void RemoveSortingBooks() {
+  // frees the memory for all books in the list
+  struct Book *current, *to_remove;
+  int n;
+
+  printf("Removing books...\n");
+	if (booksHead == NULL)
+	{
+		printf("The list of books is already empty\n");
+		return;
+	}
+
+  current = booksHead;
+  while (current != NULL){
+    // Free the memory until reached the last book
+    to_remove = current;
+    current = current->next;
+    free(to_remove);
+    n++;
+  }
+  booksHead = NULL;
+  if (n == 1)
+    printf("\t1 books has been removed\n");
+  else
+    printf("\t%d books have been removed\n", n);
+}
 
 //----------------------------------------------------------Stack
 // WARNING: do not change this function
