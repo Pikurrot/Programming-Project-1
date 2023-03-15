@@ -158,7 +158,57 @@ void InitStacks() {
   }
   
 // function to print all stacks of different plates
-void PrintPlates() {}
+void PrintPlates() {
+  int i = 0;
+  struct Plate *plateCurrent;
+  enum PlateType plateType;
+  enum Colors plateColor;
+  
+  while(i < NUMBER_STACKS) {
+    plateCurrent = Top_ofPlateStacks[i];
+    
+    while(plateCurrent != NULL) {
+      if(plateCurrent == NULL) {
+        plateType = plateCurrent->type;
+        printf("The stack of ");
+        switch (plateType){
+          case dinner_plate:
+            printf("dinner plates");
+            break;
+          case soup_plate:
+            printf("soup plate");
+            break;
+          case dessert_plate:
+            printf("dessert plate");
+            break;
+        }
+        printf(" is empty\n");
+      }
+  
+      else{
+        plateColor = plateCurrent->color;
+        switch (plateColor){
+          case white:
+            printf("white");
+            break;
+          case green:
+            printf("green");
+            break;
+          case yellow:
+            printf("yellow");
+            break;
+          case beige:
+            printf("beige");
+            break;
+        }
+        printf(" plate\n");
+      }
+  
+      plateCurrent = plateCurrent->next;
+    }
+    i++;
+  }
+}
 
 // function to remove a given stack when its MAX_CAPACITY is reached
 void RemoveStack(/*...*/) {}
