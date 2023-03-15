@@ -89,11 +89,24 @@ struct Book *SearchBook(char author[20]) {
     else
       current = current->next;
   }
-  return current; // NULL; // not found
+  return current; // the last book in the list
 }
 
 // function to simulate a sorting of books
-void SimulateSortingBooks(struct Book *book) {}
+void SimulateSortingBooks(struct Book *book) {
+  // places the given book in the correct place in the list of books
+  struct Book *booksCurrent = SearchBook(book->author);
+  
+  if (booksCurrent == NULL){
+    booksHead = book;
+    booksHead->next = NULL;
+    return;
+  }
+
+  book->next = booksCurrent->next;
+  booksCurrent->next = book;
+  PrintBooks(); //test print book list
+}
 
 // function to remove a list of books at the end of the program
 void RemoveSortingBooks() {}
