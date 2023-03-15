@@ -150,8 +150,13 @@ struct Plate *GeneratePlate() {
 }
 
 // function to initialize all stacks of plates
-void InitStacks() {}
-
+void InitStacks() {
+  // int i = 0;
+  // while(i<NUMBER_STACKS) {
+  //   struct Plate *Top_ofPlateStacks[i]=NULL; //??
+  //   i++;
+  }
+  
 // function to print all stacks of different plates
 void PrintPlates() {}
 
