@@ -4,6 +4,11 @@ Subject: Fundamentals of Programming 2
 Practical project: 1
 
 Simulator - main program
+DUBTES:
+1. must books be organized alphabetically by author?
+2. color of plates
+3. void InitStacks() and *Top_ofPlateStacks[NUMBER_STACKS]
+4. events consumed (events of the same type are consumed together or we can consume first 1 book, then 1 plate, then 1 book...?)
 */
 
 #include <stdio.h>
