@@ -370,7 +370,20 @@ void SimulateGoForShopping(struct Shopping *shopping) {
 }
 
 // function to clean shopping queue before the end of the program
-void CleanShoppingQueue(/*...*/) {}
+void CleanShoppingQueue(/*struct Shopping * */) {
+  int n = 0;
+  printf("\tCleaning shopping queue...\n");
+  
+  while (queueFirst != NULL) {
+    n++;
+    Dequeue();
+  }
+  if (n == 1)
+    printf("\t\t1 robot has been removed\n");
+  else
+    printf("\t\t%d robots have been removed\n", n);
+  
+}
 
 //----------------------------------------------------------main
 // This is the main loop of the program.
