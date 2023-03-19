@@ -264,7 +264,22 @@ void SimulateManagingPlate(struct Plate *plate) {
 }
 
 // function to clean all stacks before the end of the program
-void CleanPlateStacks() {}
+void CleanPlateStacks() {
+  int n = 0;
+
+  printf("\tCleaning all stacks of plates...\n");
+  
+  for (int i = 0; i < NUMBER_STACKS; i++){
+    n += CurrentState[i];
+    RemoveStack(i);
+  }
+  
+  if (n == 1)
+    printf("\t\t1 plate has been removed\n");
+  else
+    printf("\t\t%d plates have been removed\n", n);
+  
+}
 
 //----------------------------------------------------------Shopping
 // WARNING: do not change this function
