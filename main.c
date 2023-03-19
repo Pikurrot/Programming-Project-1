@@ -253,7 +253,15 @@ void PushPlate(struct Plate *plate, enum PlateType type)
 }
 
 // function to simulate putting a generated plate to a corresponding stack
-void SimulateManagingPlate(struct Plate *plate) {}
+void SimulateManagingPlate(struct Plate *plate) {
+  int plateType = plate->type;
+  if (CurrentState[plateType] == MAX_CAPACITY) {
+    RemoveStack(plateType);
+    printf("Cleaning stack %d, now there are %d plates.\n", plateType, CurrentState[plateType]);
+  }
+  PushPlate(plate, plateType);
+
+}
 
 // function to clean all stacks before the end of the program
 void CleanPlateStacks() {}
