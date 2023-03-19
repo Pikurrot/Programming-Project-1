@@ -18,6 +18,8 @@ DUBTES:
 
 int EventNumbers = -1;
 
+int eventsToConsume = 0;
+
 //----------------------------------------------------------General
 // WARNING: do not change this function
 enum EventType GenerateEventType() { return rand() % 3; }
@@ -111,6 +113,7 @@ void SimulateSortingBooks(struct Book *book) {
   book->next = booksCurrent->next;
   booksCurrent->next = book;
   PrintBooks(); //test print book list
+  eventsToConsume--;
 }
 
 // function to remove a list of books at the end of the program
@@ -261,6 +264,7 @@ void SimulateManagingPlate(struct Plate *plate) {
   }
   PushPlate(plate, plateType);
 
+  eventsToConsume--;
 }
 
 // function to clean all stacks before the end of the program
@@ -353,7 +357,11 @@ int Dequeue() {
 }
 
 // function to simulate the time the robot is in the queue
-void UpdateShopping(/*...*/) {}
+void UpdateShopping(/*...*/) {
+  if (eventsToConsume == 0){
+    eventsToConsume = Dequeue();
+  }
+}
 
 // function to simulate a robot going for shopping
 void SimulateGoForShopping(struct Shopping *shopping) {}
