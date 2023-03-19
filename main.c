@@ -326,7 +326,31 @@ void AddToQueue(struct Shopping *shopping) {
 
 // function to remove a robot from the queue and serve it
 // it may return the number of things to buy to simulate the time
-int Dequeue() {}
+int Dequeue() {
+  struct Shopping *temp;
+  int thingsToBuy;
+  
+	if (queueFirst == NULL) {
+    printf("nothing to remove"); //test printf
+		return 0;
+  }
+  
+	if (queueFirst->next == NULL)
+	{
+    thingsToBuy = queueFirst->numberThingsToBuy;
+		free(queueFirst);
+		queueFirst = NULL;
+		queueLast = NULL;
+		return thingsToBuy;
+	}
+  
+  thingsToBuy = queueFirst->numberThingsToBuy;
+	temp = queueFirst->next;
+	free(queueFirst);
+	queueFirst = temp;
+  // PrintShopping();
+  return thingsToBuy;
+}
 
 // function to simulate the time the robot is in the queue
 void UpdateShopping(/*...*/) {}
