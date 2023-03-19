@@ -295,7 +295,15 @@ struct Shopping *GenerateShopping() {
 }
 
 // function to print a list of robots in a shopping queue
-void PrintShopping() {}
+void PrintShopping() {
+  struct Shopping * current = queueFirst; 
+  while (current != NULL) 
+  {   
+    printf("ID: %d, number of things to buy: %d\n", current->robot_id, current->numberThingsToBuy);
+    current = current->next; 
+  } 
+	printf ("\n");
+}
 
 // function to add a robot to a shopping queue
 void AddToQueue(struct Shopping *shopping) {}
