@@ -34,7 +34,8 @@ void CheckArguments(int argc, char **argv) {
   if (argc < 2) {
     printf("Argument is missing (integer)!\n");
     return;
-  } else if (argc > 2) {
+  } 
+  else if (argc > 2) {
     printf("Too much arguments. You must pass only one (integer).\n");
     return;
   }
@@ -50,7 +51,8 @@ void CheckArguments(int argc, char **argv) {
   if (x < 0) {
     printf("Argument passed was negative, will be treated as positive int\n");
     x *= -1;
-  } else if (x == 0) {
+  } 
+  else if (x == 0) {
     printf("You must enter an integer (over 0)\n");
     return;
   }
@@ -230,7 +232,7 @@ void RemoveStack(enum PlateType type) {
   if (Top_ofPlateStacks[type] == NULL) {
 		return;
   }
-  while(Top_ofPlateStacks[type] != NULL) {
+  while (Top_ofPlateStacks[type] != NULL) {
     temp = Top_ofPlateStacks[type]->next;
   	free(Top_ofPlateStacks[type]);
   	Top_ofPlateStacks[type] = temp;
@@ -277,7 +279,7 @@ void CleanPlateStacks() {
 
   printf("\tCleaning all stacks of plates...\n");
   
-  for (int i = 0; i < NUMBER_STACKS; i++){
+  for (int i = 0; i < NUMBER_STACKS; i++) {
     n += CurrentState[i];
     RemoveStack(i);
   }
@@ -323,8 +325,8 @@ void AddToQueue(struct Shopping *shopping) {
 		queueLast = queueFirst;
 		return;
 	}
- //  while(current->next!=NULL) //current!=last
- //   	{
+  //  while(current->next!=NULL) //current!=last
+  //   	{
 	// 	current=current->next;
 	// }
 	queueLast->next = shopping;
@@ -361,7 +363,7 @@ int Dequeue() {
 }
 
 // function to simulate the time the robot is in the queue
-void UpdateShopping(/*...*/) {
+void UpdateShopping() {
   if (eventsToConsume == 0){
     eventsToConsume = Dequeue();
   }
@@ -374,7 +376,7 @@ void SimulateGoForShopping(struct Shopping *shopping) {
 }
 
 // function to clean shopping queue before the end of the program
-void CleanShoppingQueue(/*struct Shopping * */) {
+void CleanShoppingQueue() {
   int n = 0;
   printf("\tCleaning shopping queue...\n");
   
@@ -406,18 +408,18 @@ void SimulationLoop() {
     // generate event type
     currentEvent = GenerateEventType();
     switch (currentEvent) { // depending on the generated event type:
-    case book: // event type 0:
-      currentBook = GenerateBook(); // generate book
-      SimulateSortingBooks(currentBook); // Simulate sorting books
-      break;
-    case plate: // event type 1:
-      currentPlate = GeneratePlate(); // generate plate
-      SimulateManagingPlate(currentPlate); // Simulate managing plate
-      break;
-    case shopping: // event type 2:
-			currentShopping = GenerateShopping(); // generate shopping
-      SimulateGoForShopping(currentShopping); // Simulate shopping
-      break;
+			case book: // event type 0:
+				currentBook = GenerateBook(); // generate book
+				SimulateSortingBooks(currentBook); // Simulate sorting books
+				break;
+			case plate: // event type 1:
+				currentPlate = GeneratePlate(); // generate plate
+				SimulateManagingPlate(currentPlate); // Simulate managing plate
+				break;
+			case shopping: // event type 2:
+				currentShopping = GenerateShopping(); // generate shopping
+				SimulateGoForShopping(currentShopping); // Simulate shopping
+				break;
     }
   }
 
