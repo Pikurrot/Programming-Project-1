@@ -364,7 +364,10 @@ void UpdateShopping(/*...*/) {
 }
 
 // function to simulate a robot going for shopping
-void SimulateGoForShopping(struct Shopping *shopping) {}
+void SimulateGoForShopping(struct Shopping *shopping) {
+  AddToQueue(shopping);
+  UpdateShopping();
+}
 
 // function to clean shopping queue before the end of the program
 void CleanShoppingQueue(/*...*/) {}
