@@ -78,6 +78,7 @@ void PrintBooks() {
     printf("%s=>", booksCurrent->title);
     printf("%d=>", booksCurrent->year);
     booksCurrent = booksCurrent->next;
+    printf("\n");
   }
   printf("\n");
 }
@@ -112,7 +113,8 @@ void SimulateSortingBooks(struct Book *book) {
 
   book->next = booksCurrent->next;
   booksCurrent->next = book;
-  PrintBooks(); //test print book list
+  // PrintBooks(); //test print book list
+
   eventsToConsume--;
 }
 
@@ -122,10 +124,10 @@ void RemoveSortingBooks() {
   struct Book *current, *to_remove;
   int n;
 
-  printf("Removing books...\n");
+  printf("\tRemoving books...\n");
 	if (booksHead == NULL)
 	{
-		printf("The list of books is already empty\n");
+		printf("\t\tThe list of books is already empty\n");
 		return;
 	}
 
@@ -139,9 +141,9 @@ void RemoveSortingBooks() {
   }
   booksHead = NULL;
   if (n == 1)
-    printf("\t1 books has been removed\n");
+    printf("\t\t1 books has been removed\n");
   else
-    printf("\t%d books have been removed\n", n);
+    printf("\t\t%d books have been removed\n", n);
 }
 
 //----------------------------------------------------------Stack
@@ -175,7 +177,7 @@ void PrintPlates() {
   
   while(i < NUMBER_STACKS) {
     plateCurrent = Top_ofPlateStacks[i];
-    
+    printf("stack %d\n", i);
     while(plateCurrent != NULL) {
       if(plateCurrent == NULL) {
         plateType = plateCurrent->type;
