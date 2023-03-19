@@ -388,45 +388,40 @@ void CleanShoppingQueue(/*struct Shopping * */) {
 //----------------------------------------------------------main
 // This is the main loop of the program.
 // It generates and consumes events.
-void SimulationLoop(int EventNumbers) {
+void SimulationLoop() {
   // declare and initialize necessary variables
   int i;
   enum EventType currentEvent;
-  struct Book *currenBook;
-  struct Plate *currenPlate;
+  struct Book *currentBook;
+  struct Plate *currentPlate;
+  struct Shopping *currentShopping;
 
+  InitStacks();
+  
   for (i = 0; i < EventNumbers; i++) {
+    // generate event type
     currentEvent = GenerateEventType();
-    switch (currentEvent) {
-    case book:
-      currenBook = GenerateBook();
+    switch (currentEvent) { // depending on the generated event type:
+    case book: // event type 0:
+      currentBook = GenerateBook(); // generate book
+      SimulateSortingBooks(currentBook); // Simulate sorting books
       break;
-    case plate:
-      currenPlate = GeneratePlate();
+    case plate: // event type 1:
+      currentPlate = GeneratePlate(); // generate plate
+      SimulateManagingPlate(currentPlate); // Simulate managing plate
       break;
-    case shopping:
-			GenerateShopping();
+    case shopping: // event type 2:
+			currentShopping = GenerateShopping(); // generate shopping
+      SimulateGoForShopping(currentShopping); // Simulate shopping
       break;
     }
   }
 
-  InitStacks();
-
-  for (int i = 0; i < EventNumbers; i++) {
-    // generate event type
-    // depending on the generated event type:
-    // event type 0:
-    // generate book
-    // Simulate sorting books
-    // event type 1:
-    // generate plate
-    // Simulate managing plate
-    // event type 2:
-    // generate shopping
-    // Simulate shopping
-    // UpdateShopping
-  }
   // CLEANING THE SIMULATION
+  printf("STATISTICS WHEN CLEANING THE SIMULATION:\n");
+  RemoveSortingBooks();
+  CleanPlateStacks();
+  CleanShoppingQueue();
 }
 
 int main(int argc, char **argv) {
@@ -436,6 +431,6 @@ int main(int argc, char **argv) {
   if (EventNumbers == -1)
     return 1;
 
-  SimulationLoop(EventNumbers);
+  SimulationLoop();
   return 0;
 }
