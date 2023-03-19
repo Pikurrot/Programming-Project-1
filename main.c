@@ -306,7 +306,23 @@ void PrintShopping() {
 }
 
 // function to add a robot to a shopping queue
-void AddToQueue(struct Shopping *shopping) {}
+void AddToQueue(struct Shopping *shopping) {
+
+	if (queueFirst == NULL)
+	{
+		queueFirst = shopping;
+		queueFirst->next = NULL;
+		queueLast = queueFirst;
+		return;
+	}
+ //  while(current->next!=NULL) //current!=last
+ //   	{
+	// 	current=current->next;
+	// }
+	queueLast->next = shopping;
+	queueLast = shopping;
+	queueLast->next = NULL;
+}
 
 // function to remove a robot from the queue and serve it
 // it may return the number of things to buy to simulate the time
