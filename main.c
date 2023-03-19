@@ -5,10 +5,12 @@ Practical project: 1
 
 Simulator - main program
 DUBTES:
-1. must books be organized alphabetically by author?
-2. color of plates
-3. void InitStacks() and *Top_ofPlateStacks[NUMBER_STACKS]
-4. events consumed (events of the same type are consumed together or we can consume first 1 book, then 1 plate, then 1 book...?)
+1. %rand() always have the same num
+2. EXECUTE ON REPLIT AND VSCODE gcc -o exe main.c ./exe ...
+NOTES RESOLUCIÓ
+1. When release books? ONCE. for each malloc, a free() 
+2. REPORT; Briefly explain how it works, but also which problems did we have and how did we solve them.
+ REPASSAR I ESBORRAR ALGUNS COMMENTS I TESTPRINTS
 */
 
 #include <stdio.h>
