@@ -217,7 +217,40 @@ void PrintPlates() {
 }
 
 // function to remove a given stack when its MAX_CAPACITY is reached
-void RemoveStack(/*...*/) {}
+void RemoveStack(enum PlateType type) {
+  struct Plate *temp;
+
+  if (Top_ofPlateStacks[type] == NULL) {
+		return;
+  }
+  while(Top_ofPlateStacks[type] != NULL) {
+    temp = Top_ofPlateStacks[type]->next;
+  	free(Top_ofPlateStacks[type]);
+  	Top_ofPlateStacks[type] = temp;
+  }
+  
+  CurrentState[type] = 0;
+  
+  PrintPlates();
+}
+
+// put given plate at the top of the given stack
+void PushPlate(struct Plate *plate, enum PlateType type)
+{
+	if (Top_ofPlateStacks[type] == NULL)
+	{
+		Top_ofPlateStacks[type] = plate;
+		Top_ofPlateStacks[type]->next = NULL;
+    CurrentState[type] += 1;
+    printf("1. Pushing plate to stack %d, now there are %d plates.\n", type, CurrentState[type]);
+		return;
+	}
+	plate->next = Top_ofPlateStacks[type];
+	Top_ofPlateStacks[type] = plate;
+
+  CurrentState[type] += 1;
+  printf("2. Pushing plate to stack %d, now there are %d plates.\n", type, CurrentState[type]);
+}
 
 // function to simulate putting a generated plate to a corresponding stack
 void SimulateManagingPlate(struct Plate *plate) {}
