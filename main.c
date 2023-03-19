@@ -122,7 +122,7 @@ void SimulateSortingBooks(struct Book *book) {
 void RemoveSortingBooks() {
   // frees the memory for all books in the list
   struct Book *current, *to_remove;
-  int n;
+  int n = 0;
 
   printf("\tRemoving books...\n");
 	if (booksHead == NULL)
