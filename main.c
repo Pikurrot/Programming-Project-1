@@ -96,7 +96,7 @@ struct Book *SearchBook(char author[20]) {
 
   struct Book *current = booksHead;
   while (current->next != NULL) {
-    if (current->author == author)
+    if (strcmp(current->author, author) == 0) {
       return current;
     else
       current = current->next;
