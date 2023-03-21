@@ -240,8 +240,6 @@ void RemoveStack(enum PlateType type) {
   }
   
   CurrentState[type] = 0;
-  
-  PrintPlates();
 }
 
 // put given plate at the top of the given stack
@@ -327,10 +325,6 @@ void AddToQueue(struct Shopping *shopping) {
 		queueLast = queueFirst;
 		return;
 	}
-  //  while(current->next!=NULL) //current!=last
-  //   	{
-	// 	current=current->next;
-	// }
 	queueLast->next = shopping;
 	queueLast = shopping;
 	queueLast->next = NULL;
@@ -360,7 +354,6 @@ int Dequeue() {
 	temp = queueFirst->next;
 	free(queueFirst);
 	queueFirst = temp;
-  // PrintShopping();
   return thingsToBuy;
 }
 
