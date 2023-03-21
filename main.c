@@ -80,7 +80,7 @@ void PrintBooks() {
   while (booksCurrent != NULL) {
     printf("%s=>", booksCurrent->author);
     printf("%s=>", booksCurrent->title);
-    printf("%d=>", booksCurrent->year);
+    printf("%d", booksCurrent->year);
     booksCurrent = booksCurrent->next;
     printf("\n");
   }
