@@ -368,6 +368,8 @@ void UpdateShopping() {
 void SimulateGoForShopping(struct Shopping *shopping) {
   AddToQueue(shopping);
   UpdateShopping();
+
+  eventsToConsume--;
 }
 
 // function to clean shopping queue before the end of the program
