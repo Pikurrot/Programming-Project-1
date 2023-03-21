@@ -8,6 +8,7 @@ DUBTES:
 1. %rand() always have the same num
 2. EXECUTE ON REPLIT AND VSCODE gcc -o exe main.c ./exe ...
 NOTES RESOLUCIÓ
+3. num of shopping robots
 1. When release books? ONCE. for each malloc, a free() 
 2. REPORT; Briefly explain how it works, but also which problems did we have and how did we solve them.
  REPASSAR I ESBORRAR ALGUNS COMMENTS I TESTPRINTS
