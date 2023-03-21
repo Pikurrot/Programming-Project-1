@@ -359,7 +359,7 @@ int Dequeue() {
 
 // function to simulate the time the robot is in the queue
 void UpdateShopping() {
-  if (eventsToConsume == 0){
+  if (eventsToConsume <= 0){
     eventsToConsume = Dequeue();
   }
 }
