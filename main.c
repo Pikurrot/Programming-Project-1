@@ -112,6 +112,7 @@ void SimulateSortingBooks(struct Book *book) {
   if (booksCurrent == NULL){
     booksHead = book;
     booksHead->next = NULL;
+    eventsToConsume--;
     return;
   }
 
