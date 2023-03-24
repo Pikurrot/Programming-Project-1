@@ -4,14 +4,7 @@ Subject: Fundamentals of Programming 2
 Practical project: 1
 
 Simulator - main program
-DUBTES:
-1. %rand() always have the same num
-2. EXECUTE ON REPLIT AND VSCODE gcc -o exe main.c ./exe ...
-NOTES RESOLUCIÓ
-3. num of shopping robots
-1. When release books? ONCE. for each malloc, a free() 
-2. REPORT; Briefly explain how it works, but also which problems did we have and how did we solve them.
- REPASSAR I ESBORRAR ALGUNS COMMENTS I TESTPRINTS
+REPASSAR I ESBORRAR ALGUNS COMMENTS I TESTPRINTS
 */
 
 #include <stdio.h>
@@ -28,7 +21,7 @@ int eventsToConsume = 0;
 enum EventType GenerateEventType() { return rand() % 3; }
 
 void CheckArguments(int argc, char **argv) {
-  // check the input introduced by the user
+  // check the input introduced by the user, manages argument and handles possible user errors
   int x;
   float xf;
 
@@ -98,12 +91,13 @@ struct Book *SearchBook(char author[20]) {
   struct Book *current = booksHead;
   while (current->next != NULL) {
     if (strcmp(current->author, author) == 0) {
-      // printf("current author: %s, top author: %s",current->author,author);
+			// if same author, place after this book
+      // printf("current author: %s, top author: %s",current->author,author); //test print
       // printf("authorsearch1: %s",current->author); //test print
       return current;
     }
     else {
-      // printf("current author: d%s, top author: %s",current->author,author);
+      // printf("current author: d%s, top author: %s",current->author,author); //test print
       // printf("authorsearch2: %s\n",(current->next)->author); //test print
       current = current->next;
     }
@@ -116,22 +110,23 @@ void SimulateSortingBooks(struct Book *book) {
   // places the given book in the correct place in the list of books
   struct Book *booksCurrent = SearchBook(book->author);
   
-  if (booksCurrent == NULL){
+  if (booksCurrent == NULL){ // list is empty
     booksHead = book;
     booksHead->next = NULL;
     eventsToConsume--;
-    // printf("1 event consumed. eventsToConsume = %d.", eventsToConsume);
+    // printf("1 event consumed. eventsToConsume = %d.", eventsToConsume); //test print
     // printf("booksHead-->author empty list %d\n", booksHead->author); // test print
     return;
   }
 
+	// place after the book provided by SearchBook()
   book->next = booksCurrent->next;
   booksCurrent->next = book;
   // printf("PrintBooks:\n"); //test print
   // PrintBooks(); //test print book list
 
   eventsToConsume--;
-  printf("1 book event consumed. eventsToConsume = %d.", eventsToConsume);
+  // printf("1 book event consumed. eventsToConsume = %d.", eventsToConsume); // test print
 }
 
 // function to remove a list of books at the end of the program
@@ -241,10 +236,11 @@ void PrintPlates() {
 void RemoveStack(enum PlateType type) {
   struct Plate *temp;
 
-  if (Top_ofPlateStacks[type] == NULL) {
+  if (Top_ofPlateStacks[type] == NULL) { // stack is empty
 		return;
   }
   while (Top_ofPlateStacks[type] != NULL) {
+		// remove the top plate until the stack is empty
     temp = Top_ofPlateStacks[type]->next;
   	free(Top_ofPlateStacks[type]);
   	Top_ofPlateStacks[type] = temp;
@@ -256,33 +252,35 @@ void RemoveStack(enum PlateType type) {
 // put given plate at the top of the given stack
 void PushPlate(struct Plate *plate, enum PlateType type)
 {
-	if (Top_ofPlateStacks[type] == NULL)
+	if (Top_ofPlateStacks[type] == NULL) // stack is empty
 	{
 		Top_ofPlateStacks[type] = plate;
 		Top_ofPlateStacks[type]->next = NULL;
     CurrentState[type] += 1;
-    // printf("1. Pushing plate to stack %d, now there are %d plates.\n", type, CurrentState[type]);
+    // printf("1. Pushing plate to stack %d, now there are %d plates.\n", type, CurrentState[type]); //test printf
 		return;
 	}
+	// place the plate at the top
 	plate->next = Top_ofPlateStacks[type];
 	Top_ofPlateStacks[type] = plate;
 
   CurrentState[type] += 1;
-  // printf("2. Pushing plate to stack %d, now there are %d plates.\n", type, CurrentState[type]);
+  // printf("2. Pushing plate to stack %d, now there are %d plates.\n", type, CurrentState[type]); //test printf
 }
 
 // function to simulate putting a generated plate to a corresponding stack
 void SimulateManagingPlate(struct Plate *plate) {
   int plateType = plate->type;
 
-  PushPlate(plate, plateType);
+  PushPlate(plate, plateType); // first place the plate
   if (CurrentState[plateType] == MAX_CAPACITY) {
+		// then remove the stack if reached max_capacity
     RemoveStack(plateType);
     // printf("Cleaning stack %d, now there are %d plates.\n", plateType, CurrentState[plateType]);
   }
 
   eventsToConsume--;
-  printf("1 plate event consumed. eventsToConsume = %d.", eventsToConsume);
+  // printf("1 plate event consumed. eventsToConsume = %d.", eventsToConsume); //test printf
 }
 
 // function to clean all stacks before the end of the program
@@ -290,7 +288,8 @@ void CleanPlateStacks() {
   int n = 0;
 
   printf("\tCleaning all stacks of plates...\n");
-  
+
+	// remove all stacks
   for (int i = 0; i < NUMBER_STACKS; i++) {
     n += CurrentState[i];
     RemoveStack(i);
@@ -321,7 +320,7 @@ void PrintShopping() {
   struct Shopping * current = queueFirst; 
   while (current != NULL) 
   {   
-    // printf("ID: %d, number of things to buy: %d\n", current->robot_id, current->numberThingsToBuy);
+    printf("ID: %d, number of things to buy: %d\n", current->robot_id, current->numberThingsToBuy);
     current = current->next; 
   } 
 	printf ("\n");
@@ -330,20 +329,21 @@ void PrintShopping() {
 // function to add a robot to a shopping queue
 void AddToQueue(struct Shopping *shopping) {
 
-  printf("Adding robot with id %d to queue...\n", shopping->robot_id);
-	if (queueFirst == NULL)
+  // printf("Adding robot with id %d to queue...\n", shopping->robot_id); //test printf
+	if (queueFirst == NULL) // queue empty
 	{
 		queueFirst = shopping;
 		queueFirst->next = NULL;
 		queueLast = queueFirst;
-    printf("Successfully added to the beggining.\n");
+    // printf("Successfully added to the beggining.\n"); //test printf
 		return;
 	}
-  
+
+	// add robot to the end
 	queueLast->next = shopping;
 	queueLast = shopping;
 	queueLast->next = NULL;
-  printf("Successfully added to the end.\n");
+  // printf("Successfully added to the end.\n"); //test printf
 }
 
 // function to remove a robot from the queue and serve it
@@ -351,24 +351,25 @@ void AddToQueue(struct Shopping *shopping) {
 int Dequeue() {
   struct Shopping *temp;
   int thingsToBuy;
-  printf("Dequeuing first robot in the queue...\n");
-	if (queueFirst == NULL) {
-    printf("The queue is already empty.\n"); //test printf
+  // printf("Dequeuing first robot in the queue...\n"); //test printf
+	if (queueFirst == NULL) { // queue empty
+    // printf("The queue is already empty.\n"); //test printf
 		return 0;
   }
   
-	if (queueFirst->next == NULL)
+	if (queueFirst->next == NULL) // only 1 robot in the queue
 	{
     thingsToBuy = queueFirst->numberThingsToBuy;
-    printf("Successfully dequeued robot with id %d. Queue is now empty.\n", queueFirst->robot_id);
+    // printf("Successfully dequeued robot with id %d. Queue is now empty.\n", queueFirst->robot_id); //test printf
 		free(queueFirst);
 		queueFirst = NULL;
 		queueLast = NULL;
 		return thingsToBuy;
 	}
-  
+
   thingsToBuy = queueFirst->numberThingsToBuy;
-  printf("Successfully dequeued robot with id %d.\n", queueFirst->robot_id);
+	// remove first robot in the queue
+  // printf("Successfully dequeued robot with id %d.\n", queueFirst->robot_id); //test printf
 	temp = queueFirst->next;
 	free(queueFirst);
 	queueFirst = temp;
@@ -379,7 +380,7 @@ int Dequeue() {
 void UpdateShopping() {
   if (eventsToConsume <= 0){
     eventsToConsume = Dequeue();
-    printf("Now there are %d events to consume.", eventsToConsume);
+	// printf("Now there are %d events to consume.", eventsToConsume); //test printf
   }
 }
 
@@ -389,7 +390,7 @@ void SimulateGoForShopping(struct Shopping *shopping) {
   UpdateShopping();
 
   eventsToConsume--;
-  printf("1 shopping event consumed. eventsToConsume = %d.", eventsToConsume);
+  // printf("1 shopping event consumed. eventsToConsume = %d.", eventsToConsume); //test printf
 }
 
 // function to clean shopping queue before the end of the program
@@ -438,7 +439,7 @@ void SimulationLoop() {
 			case shopping: // event type 2:
 				currentShopping = GenerateShopping(); // generate shopping
 				SimulateGoForShopping(currentShopping); // Simulate shopping
-        PrintShopping(); // test print
+        // PrintShopping(); // test print
 				break;
     }
   }
