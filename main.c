@@ -189,43 +189,40 @@ void PrintPlates() {
   while(i < NUMBER_STACKS) {
     plateCurrent = Top_ofPlateStacks[i];
     printf("stack %d\n", i);
+		if(plateCurrent == NULL) {
+			printf("The stack of ");
+			switch (i){
+				case dinner_plate:
+					printf("dinner plates");
+					break;
+				case soup_plate:
+					printf("soup plate");
+					break;
+				case dessert_plate:
+					printf("dessert plate");
+					break;
+			}
+			printf(" is empty\n");
+			i++;
+			continue;
+		}
     while(plateCurrent != NULL) {
-      if(plateCurrent == NULL) {
-        plateType = plateCurrent->type;
-        printf("The stack of ");
-        switch (plateType){
-          case dinner_plate:
-            printf("dinner plates");
-            break;
-          case soup_plate:
-            printf("soup plate");
-            break;
-          case dessert_plate:
-            printf("dessert plate");
-            break;
-        }
-        printf(" is empty\n");
-      }
-  
-      else{
-        plateColor = plateCurrent->color;
-        switch (plateColor){
-          case white:
-            printf("white");
-            break;
-          case green:
-            printf("green");
-            break;
-          case yellow:
-            printf("yellow");
-            break;
-          case beige:
-            printf("beige");
-            break;
-        }
-        printf(" plate\n");
-      }
-  
+			plateColor = plateCurrent->color;
+			switch (plateColor){
+				case white:
+					printf("white");
+					break;
+				case green:
+					printf("green");
+					break;
+				case yellow:
+					printf("yellow");
+					break;
+				case beige:
+					printf("beige");
+					break;
+			}
+			printf(" plate\n");
       plateCurrent = plateCurrent->next;
     }
     i++;
