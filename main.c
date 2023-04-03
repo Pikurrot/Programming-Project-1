@@ -36,7 +36,7 @@ void CheckArguments(int argc, char **argv) {
   x = atoi(argv[1]); // Convert argument to integer
   xf = atof(argv[1]);
 
-  if (x != xf) {
+  if (x != xf) { //If argument was decimal, for instance
     printf("You entered %f, but will be treated as %d\n", xf, x);
   }
 
@@ -176,27 +176,27 @@ void PrintPlates() {
   enum PlateType plateType;
   enum Colors plateColor;
   
-  while(i < NUMBER_STACKS) {
+  while(i < NUMBER_STACKS) { //is repeated for each stack
     plateCurrent = Top_ofPlateStacks[i];
     printf("stack %d\n", i);
-		if(plateCurrent == NULL) {
+		if(plateCurrent == NULL) { //if either stack is empty
 			printf("The stack of ");
 			switch (i){
 				case dinner_plate:
 					printf("dinner plates");
 					break;
 				case soup_plate:
-					printf("soup plate");
+					printf("soup plates");
 					break;
 				case dessert_plate:
-					printf("dessert plate");
+					printf("dessert plates");
 					break;
 			}
 			printf(" is empty\n");
 			i++;
 			continue;
 		}
-    while(plateCurrent != NULL) {
+    while(plateCurrent != NULL) { //prints the color of each plate from each stack
 			plateColor = plateCurrent->color;
 			switch (plateColor){
 				case white:
